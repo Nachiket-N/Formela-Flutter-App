@@ -73,7 +73,7 @@ class FilledFormsListItem extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  'Due date : ${filledOn} ',
+                  'Due date : ${filledOn.day}/${filledOn.month}/${filledOn.year} ',
                   textAlign: TextAlign.left,
                   style: const TextStyle(
                     color: Color.fromRGBO(255, 255, 255, 1),

@@ -73,7 +73,7 @@ class PendingFormsListItem extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  'Due date : ${dueDate} ',
+                  'Due date : ${dueDate.day}/${dueDate.month}/${dueDate.year} ',
                   textAlign: TextAlign.left,
                   style: const TextStyle(
                     color: Color.fromRGBO(255, 255, 255, 1),
