@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'components/app_bar.dart';
-import 'components/drawer.dart';
-
+import './landingpage.dart';
 import './filledforms.dart';
 import './settings.dart';
 import './pendingforms.dart';
@@ -27,16 +25,18 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-          appBar: formelaAppBar(titleName: "FORMELA"),
-          drawer: const formelaDrawer(
-              username: "Nachiket Naik", email: "nnn@somaiya.edu"),
-          body: const Center(
-            child: Text(
-              "HOME PAGE",
-            ),
-          )),
+      home: Landingpage(),
+      // home: Scaffold(
+      //     appBar: formelaAppBar(titleName: "FORMELA"),
+      //     drawer: const formelaDrawer(
+      //         username: "Nachiket Naik", email: "nnn@somaiya.edu"),
+      //     body: const Center(
+      //       child: Text(
+      //         "HOME PAGE",
+      //       ),
+      //     )),
       routes: {
+        '/landingPage': (context) => Landingpage(),
         '/filledForms': (context) => FilledForms(),
         '/pendingForms': (context) => PendingForms(),
         '/settings': (context) => SettingsPage(),

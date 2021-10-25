@@ -19,19 +19,19 @@ class _FilledFormsBodyState extends State<FilledFormsBody> {
           avatarPath: 'assets/images/person1.png',
           title: "MBApedia",
           from: "Alumni Cell, KJSCE",
-          filledOn: DateTime(2021, 11),
+          filledOn: DateTime(2021, 11, 14),
         ),
         FilledFormsListItem(
           avatarPath: 'assets/images/person2.png',
           title: "ICW",
           from: "Alumni Cell, KJSCE",
-          filledOn: DateTime(2021, 9),
+          filledOn: DateTime(2021, 9, 19),
         ),
         FilledFormsListItem(
           avatarPath: 'assets/images/person3.png',
           title: "Stock Unlock",
           from: "Alumni Cell, KJSCE",
-          filledOn: DateTime(2021, 4),
+          filledOn: DateTime(2021, 4, 25),
         ),
       ],
     );

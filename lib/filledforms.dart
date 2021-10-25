@@ -14,7 +14,7 @@ class _FilledFormsPageState extends State<FilledForms> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: formelaAppBar(titleName: "Pending Forms"),
+      appBar: formelaAppBar(titleName: "Filled Forms"),
       drawer:
           formelaDrawer(username: "Nachiket Naik", email: "nnn@somaiya.edu"),
       body: Container(

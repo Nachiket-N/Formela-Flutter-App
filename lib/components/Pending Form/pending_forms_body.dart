@@ -19,19 +19,19 @@ class _PendingFormsBodyState extends State<PendingFormsBody> {
           avatarPath: 'assets/images/person1.png',
           title: "MBApedia",
           from: "Alumni Cell, KJSCE",
-          dueDate: DateTime(2021, 11),
+          dueDate: DateTime(2021, 11, 16),
         ),
         PendingFormsListItem(
           avatarPath: 'assets/images/person2.png',
           title: "ICW",
           from: "Alumni Cell, KJSCE",
-          dueDate: DateTime(2021, 9),
+          dueDate: DateTime(2021, 9, 21),
         ),
         PendingFormsListItem(
           avatarPath: 'assets/images/person3.png',
           title: "Stock Unlock",
           from: "Alumni Cell, KJSCE",
-          dueDate: DateTime(2021, 4),
+          dueDate: DateTime(2021, 4, 19),
         ),
       ],
     );
