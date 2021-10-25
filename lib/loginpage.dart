@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -81,24 +83,28 @@ class _LoginPageState extends State<LoginPage> {
       bottomNavigationBar: Stack(
         children: [
           Container(
-            height: 30.0,
-          ),
-          const Text(
-            'All Rights Reserved @FORMELA 2021, Created By: Amo.Mrun.Nachi.Nav',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Color.fromRGBO(255, 255, 255, 1),
-              fontSize: 10,
-              fontFamily: 'Montserrat',
-              fontWeight: FontWeight.normal,
-              height: 1,
+            height: 40,
+            alignment: Alignment.center,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'All Rights Reserved @FORMELA 2021, Created By: Amo.Mrun.Nachi.Nav',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Color.fromRGBO(255, 255, 255, 1),
+                    fontSize: 10,
+                    fontFamily: 'Montserrat',
+                    fontWeight: FontWeight.normal,
+                    height: 1,
+                  ),
+                ),
+              ],
             ),
           ),
         ],
       ),
-      // appBar: AppBar(
-      //   title: Text('login'),
-      // ),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -147,10 +153,6 @@ class _LoginPageState extends State<LoginPage> {
                 height: 1,
               ),
             ),
-            // Text(
-            //   "Hello! Let's kickstart in Formela!",
-            //   style: TextStyle(color: Color.fromRGBO(255, 255, 255, 1)),
-            // ),
             TextFormField(
               validator: (value) {
                 if (value!.isEmpty) {
@@ -202,8 +204,7 @@ class _LoginPageState extends State<LoginPage> {
                       color: Color.fromRGBO(0, 0, 0, 1),
                       fontFamily: 'Montserrat',
                       fontSize: 18,
-                      letterSpacing:
-                          0 /*percentages not used in flutter. defaulting to zero*/,
+                      letterSpacing: 0,
                       fontWeight: FontWeight.normal,
                       height: 1,
                     ),
