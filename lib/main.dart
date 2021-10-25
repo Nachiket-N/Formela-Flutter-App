@@ -37,8 +37,8 @@ class _MyAppState extends State<MyApp> {
             ),
           )),
       routes: {
-        '/filledForms': (context) => Filledforms(),
-        '/pendingForms': (context) => Pendingforms(),
+        '/filledForms': (context) => FilledForms(),
+        '/pendingForms': (context) => PendingForms(),
         '/settings': (context) => SettingsPage(),
       },
     );

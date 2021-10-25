@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'components/app_bar.dart';
 import 'components/drawer.dart';
 
-class Filledforms extends StatefulWidget {
+class FilledForms extends StatefulWidget {
   @override
-  _FilledformsPageState createState() => _FilledformsPageState();
+  _FilledFormsPageState createState() => _FilledFormsPageState();
 }
 
-class _FilledformsPageState extends State<Filledforms> {
+class _FilledFormsPageState extends State<FilledForms> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
