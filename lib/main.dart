@@ -26,15 +26,6 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Landingpage(),
-      // home: Scaffold(
-      //     appBar: formelaAppBar(titleName: "FORMELA"),
-      //     drawer: const formelaDrawer(
-      //         username: "Nachiket Naik", email: "nnn@somaiya.edu"),
-      //     body: const Center(
-      //       child: Text(
-      //         "HOME PAGE",
-      //       ),
-      //     )),
       routes: {
         '/landingPage': (context) => Landingpage(),
         '/filledForms': (context) => FilledForms(),
