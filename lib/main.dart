@@ -4,6 +4,7 @@ import './landingpage.dart';
 import './filledforms.dart';
 import './settings.dart';
 import './pendingforms.dart';
+import './errorpage.dart';
 
 void main() {
   runApp(
@@ -31,6 +32,8 @@ class _MyAppState extends State<MyApp> {
         '/filledForms': (context) => FilledForms(),
         '/pendingForms': (context) => PendingForms(),
         '/settings': (context) => SettingsPage(),
+        '/errorPage': (context) =>
+            ErrorPage(errorMessage: "Invalid Credentials Entered"),
       },
     );
   }
