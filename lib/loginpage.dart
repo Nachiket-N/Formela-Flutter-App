@@ -15,14 +15,19 @@ class _LoginPageState extends State<LoginPage> {
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
   late String _email;
   late String _password;
+  var _LoginErrorMessage = "Login Error";
+  var _LoginErrorVisibility = false;
 
   Future<void> _createUser() async {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: _email, password: _password);
     } on FirebaseAuthException catch (e) {
-      print('Failed with error code: ${e.code}');
-      print(e.message);
+      // print('Create Account Failed with error code: ${e.code}');
+      setState(() {
+        _LoginErrorMessage = e.code;
+        _LoginErrorVisibility = true;
+      });
     }
   }
 
@@ -31,47 +36,11 @@ class _LoginPageState extends State<LoginPage> {
       UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: _email, password: _password);
     } on FirebaseAuthException catch (e) {
-      switch (e.code) {
-        case "ERROR_EMAIL_ALREADY_IN_USE":
-        case "account-exists-with-different-credential":
-        case "email-already-in-use":
-          print("Email already used. Go to login page.");
-          break;
-        case "ERROR_WRONG_PASSWORD":
-        case "wrong-password":
-          print("Wrong email/password combination.");
-          break;
-        case "ERROR_USER_NOT_FOUND":
-        case "user-not-found":
-          print("No user found with this email.");
-          break;
-        case "ERROR_USER_DISABLED":
-        case "user-disabled":
-          print("User disabled.");
-          break;
-        case "ERROR_TOO_MANY_REQUESTS":
-        case "operation-not-allowed":
-          print("Too many requests to log into this account.");
-          break;
-        case "ERROR_OPERATION_NOT_ALLOWED":
-        case "operation-not-allowed":
-          print("Server error, please try again later.");
-          break;
-        case "ERROR_INVALID_EMAIL":
-        case "invalid-email":
-          print("Email address is invalid.");
-          break;
-        default:
-          print("ERROR::::::" + e.code);
-          print("Login failed. Please try again.");
-          break;
-      }
-      // if (e.code == 'user-not-found') {
-      //   print('No user found for that email.');
-      //   print(e.message);
-      // } else if (e.code == 'wrong-password') {
-      //   print('Wrong password provided for that user.');
-      // }
+      // print('Login Failed with error code: ${e.code}');
+      setState(() {
+        _LoginErrorMessage = e.code.toString();
+        _LoginErrorVisibility = true;
+      });
     }
   }
 
@@ -154,25 +123,17 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             TextFormField(
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return ('email cannot be empty');
-                } else {
-                  return ('email correct');
-                }
-              },
               cursorColor: const Color.fromRGBO(65, 62, 75, 1),
               style: const TextStyle(color: Color.fromRGBO(0, 0, 0, 1)),
               onChanged: (value) {
                 _email = value;
               },
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 border: OutlineInputBorder(),
-                hintText: 'Enter Email Address',
+                hintText: "Enter Email Address",
                 fillColor: Colors.white,
                 filled: true,
               ),
-              keyboardType: TextInputType.emailAddress,
             ),
             TextField(
               obscureText: true,
@@ -186,6 +147,15 @@ class _LoginPageState extends State<LoginPage> {
               onChanged: (value) {
                 _password = value;
               },
+            ),
+            Container(
+              child: Visibility(
+                visible: _LoginErrorVisibility,
+                child: Text(
+                  _LoginErrorMessage,
+                  style: TextStyle(color: Colors.red, fontFamily: 'Montserrat'),
+                ),
+              ),
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
