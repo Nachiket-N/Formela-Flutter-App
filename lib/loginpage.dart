@@ -38,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
     } on FirebaseAuthException catch (e) {
       // print('Login Failed with error code: ${e.code}');
       setState(() {
-        _LoginErrorMessage = e.code.toString();
+        _LoginErrorMessage = e.code;
         _LoginErrorVisibility = true;
       });
     }
