@@ -4,6 +4,7 @@ import './landingpage.dart';
 import './filledforms.dart';
 import './settings.dart';
 import './pendingforms.dart';
+import './components/Pending Form/pending_form_single.dart';
 
 void main() {
   runApp(
@@ -30,6 +31,7 @@ class _MyAppState extends State<MyApp> {
         '/landingPage': (context) => Landingpage(),
         '/filledForms': (context) => FilledForms(),
         '/pendingForms': (context) => PendingForms(),
+        // '/pendingFormSingle': (context) => PendingFormSingle( ),
         '/settings': (context) => SettingsPage(),
       },
     );
