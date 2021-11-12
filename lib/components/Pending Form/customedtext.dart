@@ -18,7 +18,7 @@ class _CustomizedTextState extends State<CustomizedText> {
       padding: const EdgeInsets.all(6),
       child: Text(
         widget.inputText,
-        style: TextStyle(
+        style: const TextStyle(
             color: Color.fromRGBO(65, 62, 75, 1),
             fontFamily: 'Montserrat',
             fontSize: 16,

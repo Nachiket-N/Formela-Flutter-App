@@ -1,5 +1,8 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:formela/components/Pending%20Form/pending_forms_items.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 
 import 'pending_forms_items.dart';
@@ -26,18 +29,20 @@ class PendingFormSingle extends StatefulWidget {
 
 class _PendingFormSingleState extends State<PendingFormSingle> {
   var rating = 0.0;
-  var _value = 1;
+  int _value = 1;
 
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+
     BoxDecoration customBox = BoxDecoration(
-      color: Color.fromRGBO(255, 255, 255, 1),
+      color: const Color.fromRGBO(255, 255, 255, 1),
       border: Border.all(
-        color: Color.fromRGBO(65, 62, 75, 1),
+        color: const Color.fromRGBO(65, 62, 75, 1),
       ),
     );
+
     TextFormField userInputText = TextFormField(
       validator: (value) {
         if (value == null || value.isEmpty) {
@@ -87,20 +92,22 @@ class _PendingFormSingleState extends State<PendingFormSingle> {
                 ],
               ),
             ),
+
             SizedBox(
               height: 20,
             ),
             //////////////////////////////////////////////////////////
+
             Container(
               height: height * .15,
-              width: width * .9,
+              width: width,
               decoration: customBox,
               padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   CustomizedText(
-                    inputText: "Was the delivery on time?",
+                    inputText: "Was the delivery on time ?",
                   ),
                   SizedBox(
                     height: 10,
@@ -116,7 +123,7 @@ class _PendingFormSingleState extends State<PendingFormSingle> {
                             activeColor: Colors.black,
                             onChanged: (value) {
                               setState(() {
-                                // _value = value;
+                                _value = 1;
                                 print("Yes the delivery is reached on time");
                               });
                             }),
@@ -135,7 +142,7 @@ class _PendingFormSingleState extends State<PendingFormSingle> {
                             activeColor: Colors.black,
                             onChanged: (value) {
                               setState(() {
-                                // _value = value;
+                                _value = 2;
                                 print("No,the delivery was delayed");
                               });
                             }),
@@ -157,7 +164,7 @@ class _PendingFormSingleState extends State<PendingFormSingle> {
             ),
             Container(
               height: height * .15,
-              width: width * .9,
+              width: width,
               decoration: customBox,
               padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
               child: Column(
@@ -187,7 +194,7 @@ class _PendingFormSingleState extends State<PendingFormSingle> {
             ),
             Container(
               height: height * .15,
-              width: width * .9,
+              width: width,
               decoration: customBox,
               padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
               child: Column(
