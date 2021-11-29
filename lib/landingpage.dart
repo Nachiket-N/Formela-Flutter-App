@@ -34,14 +34,14 @@ class Landingpage extends StatelessWidget {
                     return PendingForms();
                   }
                 }
-                return Scaffold(
+                return const Scaffold(
                   body: Center(
                     child: Text('checking login..'),
                   ),
                 );
               });
         }
-        return Scaffold(
+        return const Scaffold(
           body: Center(
             child: Text('connecting!'),
           ),
