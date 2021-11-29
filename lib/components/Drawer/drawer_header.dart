@@ -1,12 +1,14 @@
 import 'dart:ui';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class drawerHeader extends StatefulWidget {
-  final String username;
-  final String email;
+  var email = FirebaseAuth.instance.currentUser?.email;
 
-  const drawerHeader({Key? key, required this.username, required this.email})
-      : super(key: key);
+  var username = "Aizen";
+
+  drawerHeader({Key? key}) : super(key: key);
   @override
   _drawerHeaderState createState() => _drawerHeaderState();
 }
@@ -14,6 +16,10 @@ class drawerHeader extends StatefulWidget {
 class _drawerHeaderState extends State<drawerHeader> {
   @override
   Widget build(BuildContext context) {
+    if (widget.email != null) {
+      widget.email = widget.email.toString();
+      widget.username = widget.email!.substring(0, widget.email!.indexOf('@'));
+    }
     return Container(
       color: const Color(0xFFFFBD59),
       width: double.infinity,
@@ -41,7 +47,7 @@ class _drawerHeaderState extends State<drawerHeader> {
                 fontSize: 20),
           ),
           Text(
-            widget.email,
+            widget.email.toString(),
             style: const TextStyle(
               color: Color(0xFF413E4B),
               fontFamily: 'Montserrat',

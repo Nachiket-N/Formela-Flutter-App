@@ -5,11 +5,7 @@ import './Drawer/drawer_header.dart';
 import 'Drawer/drawer_list.dart';
 
 class formelaDrawer extends StatelessWidget {
-  final String username;
-  final String email;
-
-  const formelaDrawer({Key? key, required this.username, required this.email})
-      : super(key: key);
+  formelaDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +15,7 @@ class formelaDrawer extends StatelessWidget {
           color: const Color(0xFF88878f),
           child: Column(
             children: [
-              drawerHeader(
-                username: username,
-                email: email,
-              ),
+              drawerHeader(),
               Divider(),
               formelaDrawerItem(
                 icon: Icons.event,
