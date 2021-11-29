@@ -15,8 +15,7 @@ class _FilledFormsPageState extends State<FilledForms> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: formelaAppBar(titleName: "Filled Forms"),
-      drawer:
-          formelaDrawer(username: "Nachiket Naik", email: "nnn@somaiya.edu"),
+      drawer: formelaDrawer(),
       body: Container(
         color: Color.fromRGBO(65, 62, 75, 1),
         child: FilledFormsBody(),
