@@ -1,4 +1,8 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:async';
 
 import './pending_forms_items.dart';
 
@@ -10,30 +14,60 @@ class PendingFormsBody extends StatefulWidget {
 }
 
 class _PendingFormsBodyState extends State<PendingFormsBody> {
+  // var pendingFormsList;
+
+  Future<List<PendingFormsListItem>> _getPendingFormsList() async {
+    var pendingFormsList = <PendingFormsListItem>[];
+
+    QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
+        .instance
+        .collection("forms")
+        .where("Pending", isEqualTo: true)
+        .get();
+
+    List<QueryDocumentSnapshot> docs = snapshot.docs;
+
+    var i = 0;
+    for (var doc in docs) {
+      i++;
+      var data = doc.data() as Map<String, dynamic>;
+
+      var obj = PendingFormsListItem(
+        avatarPath: 'assets/images/person${i}.png',
+        title: data['Form_Name'],
+        from: data['Given By'],
+        dueDate: DateTime.parse(data['To Date'].toDate().toString()),
+      );
+
+      i = i % 3;
+
+      pendingFormsList.add(obj);
+    }
+    // print(pendingFormsList);
+    return pendingFormsList;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      // padding: const EdgeInsets.all(8.0),
-      children: <PendingFormsListItem>[
-        PendingFormsListItem(
-          avatarPath: 'assets/images/person1.png',
-          title: "MBApedia",
-          from: "Alumni Cell, KJSCE",
-          dueDate: DateTime(2021, 11, 16),
-        ),
-        PendingFormsListItem(
-          avatarPath: 'assets/images/person2.png',
-          title: "ICW",
-          from: "Alumni Cell, KJSCE",
-          dueDate: DateTime(2021, 9, 21),
-        ),
-        PendingFormsListItem(
-          avatarPath: 'assets/images/person3.png',
-          title: "Stock Unlock",
-          from: "Alumni Cell, KJSCE",
-          dueDate: DateTime(2021, 4, 19),
-        ),
-      ],
+    return FutureBuilder(
+      future: _getPendingFormsList(),
+      builder: (context, AsyncSnapshot<List<PendingFormsListItem>> snapshot) {
+        if (snapshot.hasData) {
+          print(snapshot.data![0]);
+
+          return ListView(
+            children: <Widget>[...?snapshot.data],
+          );
+        } else {
+          return Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            child: Container(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
+      },
     );
   }
 }
