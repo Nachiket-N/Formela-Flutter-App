@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import './pending_form_single.dart';
 
 class PendingFormsListItem extends StatelessWidget {
+  String formid = "";
   String avatarPath = "";
   String title = "";
   String from = "";
@@ -10,6 +11,7 @@ class PendingFormsListItem extends StatelessWidget {
 
   PendingFormsListItem({
     Key? key,
+    required this.formid,
     required this.avatarPath,
     required this.title,
     required this.from,
@@ -96,6 +98,7 @@ class PendingFormsListItem extends StatelessWidget {
         context,
         MaterialPageRoute(
           builder: (context) => PendingFormSingle(
+            formid: formid,
             avatarPath: avatarPath,
             title: title,
             from: from,

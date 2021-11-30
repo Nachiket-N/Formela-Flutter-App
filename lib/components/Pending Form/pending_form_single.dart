@@ -12,6 +12,7 @@ import 'customedtext.dart';
 import '../app_bar.dart';
 
 class PendingFormSingle extends StatefulWidget {
+  final String formid;
   final String avatarPath;
   final String title;
   final String from;
@@ -19,6 +20,7 @@ class PendingFormSingle extends StatefulWidget {
 
   PendingFormSingle({
     Key? key,
+    required this.formid,
     required this.avatarPath,
     required this.title,
     required this.from,
@@ -36,6 +38,17 @@ class _PendingFormSingleState extends State<PendingFormSingle> {
   var overallExp = "";
   var updatesOnFutureEvents = "Yes";
   var suggestions = "";
+
+  Future<void> _updateDB({var obj, String? formid}) async {
+    await FirebaseFirestore.instance.collection("form_responses").add(obj);
+    // print("/////////////////////");
+    // print(formid);
+
+    await FirebaseFirestore.instance
+        .collection("forms")
+        .doc(formid)
+        .update({'Pending': false});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +85,7 @@ class _PendingFormSingleState extends State<PendingFormSingle> {
               width: width,
               color: Color(0xFF413E4B),
               child: PendingFormsListItem(
+                formid: widget.formid,
                 avatarPath: widget.avatarPath,
                 title: widget.title,
                 from: widget.from,
@@ -147,7 +161,7 @@ class _PendingFormSingleState extends State<PendingFormSingle> {
                               setState(() {
                                 // updatesOnFutureEvents = "Yes";
                                 _value = 1;
-                                print("Yes the delivery is reached on time");
+                                // print("Yes the delivery is reached on time");
                               });
                             }),
                         SizedBox(
@@ -258,17 +272,22 @@ class _PendingFormSingleState extends State<PendingFormSingle> {
                 ),
                 onPressed: () {
                   if (overallExp != "" && suggestions != "") {
-                    FirebaseFirestore.instance
-                        .collection("form_responses")
-                        .add({
+                    var obj = {
                       'Form_Name': widget.title,
                       'Filled_By': FirebaseAuth.instance.currentUser?.email,
                       "Overall_Experience": overallExp,
                       "Receive_Future_Updates": updatesOnFutureEvents,
                       "Rating": rating,
                       "Suggestions": suggestions,
-                    });
+                    };
+                    // print("/////////////mmmmmmm////");
+                    // print(obj);
+                    // print(widget.formid);
+                    _updateDB(obj: obj, formid: widget.formid);
+
                     print("Your Form is succesfully submitted");
+
+                    Navigator.pushNamed(context, '/pendingForms');
                   } else {
                     print("Some fields have been left empty");
                   }

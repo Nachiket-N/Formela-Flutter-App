@@ -32,7 +32,11 @@ class _PendingFormsBodyState extends State<PendingFormsBody> {
       i++;
       var data = doc.data() as Map<String, dynamic>;
 
+      var docid = doc.id;
+      // print(docid);
+
       var obj = PendingFormsListItem(
+        formid: docid,
         avatarPath: 'assets/images/person${i}.png',
         title: data['Form_Name'],
         from: data['Given By'],
