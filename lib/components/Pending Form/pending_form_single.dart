@@ -1,9 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:formela/components/Pending%20Form/pending_forms_items.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:smooth_star_rating/smooth_star_rating.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'pending_forms_items.dart';
 import 'customedtext.dart';
@@ -31,6 +33,10 @@ class _PendingFormSingleState extends State<PendingFormSingle> {
   var rating = 0.0;
   int _value = 1;
 
+  var overallExp = "";
+  var updatesOnFutureEvents = "Yes";
+  var suggestions = "";
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -48,6 +54,8 @@ class _PendingFormSingleState extends State<PendingFormSingle> {
         if (value == null || value.isEmpty) {
           print(
               'This form will help us get feedback on the services that we provided you. We can work towards improvement from it.');
+        } else {
+          print(value);
         }
         return null;
       },
@@ -83,12 +91,25 @@ class _PendingFormSingleState extends State<PendingFormSingle> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   CustomizedText(
-                    inputText: "Description : ",
+                    inputText: "How was your overall experience?",
                   ),
                   SizedBox(
                     height: 10,
                   ),
-                  userInputText,
+                  TextFormField(
+                    onChanged: (value) {
+                      overallExp = value;
+                    },
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        print(
+                            'This form will help us get feedback on the services that we provided you. We can work towards improvement from it.');
+                      } else {
+                        print(value);
+                      }
+                      return null;
+                    },
+                  ),
                 ],
               ),
             ),
@@ -107,7 +128,8 @@ class _PendingFormSingleState extends State<PendingFormSingle> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   CustomizedText(
-                    inputText: "Was the delivery on time ?",
+                    inputText:
+                        "Would you like to receive updates on future events?",
                   ),
                   SizedBox(
                     height: 10,
@@ -123,6 +145,7 @@ class _PendingFormSingleState extends State<PendingFormSingle> {
                             activeColor: Colors.black,
                             onChanged: (value) {
                               setState(() {
+                                // updatesOnFutureEvents = "Yes";
                                 _value = 1;
                                 print("Yes the delivery is reached on time");
                               });
@@ -141,9 +164,9 @@ class _PendingFormSingleState extends State<PendingFormSingle> {
                             groupValue: _value,
                             activeColor: Colors.black,
                             onChanged: (value) {
+                              // updatesOnFutureEvents = "No";
                               setState(() {
                                 _value = 2;
-                                print("No,the delivery was delayed");
                               });
                             }),
                         SizedBox(
@@ -170,7 +193,7 @@ class _PendingFormSingleState extends State<PendingFormSingle> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  CustomizedText(inputText: "Rate our Packages!"),
+                  CustomizedText(inputText: "Rate our event!"),
                   SizedBox(
                     height: 10,
                   ),
@@ -182,6 +205,7 @@ class _PendingFormSingleState extends State<PendingFormSingle> {
                     filledIconData: Icons.star,
                     color: Color.fromRGBO(255, 189, 89, 1),
                     onRated: (value) {
+                      rating = value;
                       print("rating value -> $value");
                     },
                   )
@@ -201,12 +225,25 @@ class _PendingFormSingleState extends State<PendingFormSingle> {
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
                   CustomizedText(
-                    inputText: 'Any Suggestions would be appreciated ! ',
+                    inputText: 'Any suggestions for future events:',
                   ),
                   SizedBox(
                     height: 10,
                   ),
-                  userInputText
+                  TextFormField(
+                    onChanged: (value) {
+                      suggestions = value;
+                    },
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        print(
+                            'This form will help us get feedback on the services that we provided you. We can work towards improvement from it.');
+                      } else {
+                        print(value);
+                      }
+                      return null;
+                    },
+                  ),
                 ],
               ),
             ),
@@ -220,7 +257,21 @@ class _PendingFormSingleState extends State<PendingFormSingle> {
                   primary: Color.fromRGBO(255, 189, 89, 1),
                 ),
                 onPressed: () {
-                  print("Your Form is succesfully submitted");
+                  if (overallExp != "" && suggestions != "") {
+                    FirebaseFirestore.instance
+                        .collection("form_responses")
+                        .add({
+                      'Form_Name': widget.title,
+                      'Filled_By': FirebaseAuth.instance.currentUser?.email,
+                      "Overall_Experience": overallExp,
+                      "Receive_Future_Updates": updatesOnFutureEvents,
+                      "Rating": rating,
+                      "Suggestions": suggestions,
+                    });
+                    print("Your Form is succesfully submitted");
+                  } else {
+                    print("Some fields have been left empty");
+                  }
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
