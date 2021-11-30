@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class FilledFormsListItem extends StatelessWidget {
+  final String formid;
   final String avatarPath;
   final String title;
   final String from;
@@ -9,6 +10,7 @@ class FilledFormsListItem extends StatelessWidget {
 
   const FilledFormsListItem({
     Key? key,
+    required this.formid,
     required this.avatarPath,
     required this.title,
     required this.from,
