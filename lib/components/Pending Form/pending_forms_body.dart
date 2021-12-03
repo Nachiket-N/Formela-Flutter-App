@@ -63,11 +63,14 @@ class _PendingFormsBodyState extends State<PendingFormsBody> {
             children: <Widget>[...?snapshot.data],
           );
         } else {
-          return Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
+          return Center(
             child: Container(
-              child: CircularProgressIndicator(),
+              height: 100,
+              width: 100,
+              child: CircularProgressIndicator(
+                // backgroundColor: Color.fromRGBO(255, 255, 255, 1),
+                color: Color.fromRGBO(255, 189, 89, 1),
+              ),
             ),
           );
         }

@@ -29,7 +29,6 @@ class _FilledFormsBodyState extends State<FilledFormsBody> {
       var data = doc.data() as Map<String, dynamic>;
 
       var docid = doc.id;
-      // print(docid);
 
       var obj = FilledFormsListItem(
         formid: docid,
@@ -53,17 +52,17 @@ class _FilledFormsBodyState extends State<FilledFormsBody> {
       future: _getFilledFormsList(),
       builder: (context, AsyncSnapshot<List<FilledFormsListItem>> snapshot) {
         if (snapshot.hasData) {
-          // print(snapshot.data![0]);
-
           return ListView(
             children: <Widget>[...?snapshot.data],
           );
         } else {
-          return Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
+          return Center(
             child: Container(
-              child: CircularProgressIndicator(),
+              height: 100,
+              width: 100,
+              child: CircularProgressIndicator(
+                color: Color.fromRGBO(255, 189, 89, 1),
+              ),
             ),
           );
         }
