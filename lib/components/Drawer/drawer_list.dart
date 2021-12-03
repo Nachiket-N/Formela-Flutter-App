@@ -2,10 +2,11 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
-Widget formelaDrawerItem(
-    {required IconData icon,
-    required String text,
-    required GestureTapCallback onTap}) {
+Widget formelaDrawerItem({
+  required IconData icon,
+  required String text,
+  required GestureTapCallback onTap,
+}) {
   return ListTile(
     selectedTileColor: Color(0xFF413E4B),
     tileColor: Colors.transparent,

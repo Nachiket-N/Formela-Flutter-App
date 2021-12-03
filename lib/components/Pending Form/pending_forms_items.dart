@@ -106,16 +106,6 @@ class PendingFormsListItem extends StatelessWidget {
           ),
         ),
       ),
-      // onTap: () => Navigator.pushNamed(
-      //   context,
-      //   '/pendingFormSingle',
-      //   arguments: {
-      //     title: title,
-      //     avatarPath: avatarPath,
-      //     from: from,
-      //     dueDate: dueDate,
-      //   },
-      // ),
     );
   }
 }

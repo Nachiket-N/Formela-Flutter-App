@@ -41,8 +41,6 @@ class _PendingFormSingleState extends State<PendingFormSingle> {
 
   Future<void> _updateDB({var obj, String? formid}) async {
     await FirebaseFirestore.instance.collection("form_responses").add(obj);
-    // print("/////////////////////");
-    // print(formid);
 
     await FirebaseFirestore.instance
         .collection("forms")
@@ -280,9 +278,7 @@ class _PendingFormSingleState extends State<PendingFormSingle> {
                       "Rating": rating,
                       "Suggestions": suggestions,
                     };
-                    // print("/////////////mmmmmmm////");
-                    // print(obj);
-                    // print(widget.formid);
+
                     _updateDB(obj: obj, formid: widget.formid);
 
                     print("Your Form is succesfully submitted");
